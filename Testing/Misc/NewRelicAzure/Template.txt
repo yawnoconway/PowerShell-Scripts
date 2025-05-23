@@ -1,0 +1,8 @@
+resource "newrelic_cloud_azure_link_account" "foo"{{
+  account_id = "4203974"
+  application_id = "c23fe624-d933-455d-9f91-81a5e04682df"
+  client_secret = "Mq_8Q~UpAEszDY.zNAdUO5QBVVWwCRRuqMbqgcbT"
+  subscription_id = "{1}"
+  tenant_id = "efa95be4-db2b-4f4a-a0a7-be7810c31b8c"
+  name  = "{0}"
+}}

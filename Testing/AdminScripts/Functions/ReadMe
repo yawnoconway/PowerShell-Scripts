@@ -1,0 +1,14 @@
+Always open new Exchange online management Shell and run .\main.ps1 from there.
+Always change the directory first to location of .\main.ps1  eg: (cd C:\xyz\xyz\onboardingoffboarding)
+
+
+Interpreting the error
+    1. ERROR: Error while creating the account
+        1.1 Account already exist 
+    
+    2. VERBOSE: Connected to exch2016-egv1.literams.net.
+     Enable-Mailbox on this mail user is disallowed because the mailbox has been migrated.
+     or Any other error 
+
+        2. Account already created and migrated to exchange online. 
+        2.1 Restart Exchange Shell and run the scripts.
