@@ -1,9 +1,6 @@
 ﻿#Imports ActiveDirectory Module
 Import-Module ActiveDirectory
 
-#Sets the Litera string for the company field
-$Litera = 'LITERA - '
-
 #Remove old "Non Existent Users" csv
 Remove-Item -Path "C:\TEMP\non_existent_users.csv" -Force -ErrorAction SilentlyContinue
 
@@ -30,7 +27,7 @@ Import-Csv -Path C:\temp\ADP-Repo\workday_hcm_exportADSYNC.csv | ForEach-Object 
         }
         else {
             #Sets user account for modification, may or may not require '-Replace' depending on specific attribute
-            Set-ADUser -Identity $UserSAM -Company ($Litera + $($_.LineOfBusiness))
+            Set-ADUser -Identity $UserSAM -Company $($_.LineOfBusiness)
             Set-ADUser -Identity $UserSAM -Department $($_.Department)
             Set-ADUser -Identity $UserSAM -Office $($_.PhysicalDeliveryOfficeName)
             Set-ADUser -Identity $UserSAM -employeeID $($_.EmployeeID)
