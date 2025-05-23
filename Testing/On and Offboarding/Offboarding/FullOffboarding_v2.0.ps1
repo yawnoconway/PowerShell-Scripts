@@ -47,8 +47,8 @@ $Script:Config = @{
     BulkImportPath            = "$PSScriptRoot\Bulk-Offboarding.csv"
     
     # Active Directory
-    DisabledOU                = "OU=Disabled,OU=Users,OU=LiteraMS,DC=literams,DC=net"
-    Domain                    = "litera.com"
+    DisabledOU                = "DISTINGUISHED OU"
+    Domain                    = "DOMAIN.com"
     
     # ASCII Banner Path
     BannerFile                = "$PSScriptRoot\banner.txt"

@@ -37,7 +37,7 @@ param(
 
     [parameter(Mandatory = $false, HelpMessage = "Name of the Azure Storage Blob.")]
     [ValidateNotNullOrEmpty()]
-    [string]$BlobName = "backgrounds/CoreValues-GreetChallengesWillingly-Warm/*"
+    [string]$BlobName = "BLOB NAME HERE"
 )
 Begin {
     # Install required modules for script execution

@@ -16,7 +16,7 @@ Function Remove-UTF8BOM
 #Get users from Windows AD
 
 # Set the Active Directory OU as required below ( if the below left commented all users from AD will be returned )
-$BaseOU = "OU=Current,OU=Users,OU=LiteraMS,DC=literams,DC=net"
+$BaseOU = "DISTINGUISHED OU"
 
 $users = Get-ADUser -Filter * -Properties * -SearchBase $BaseOU
 $List = New-Object -TypeName System.Collections.ArrayList 
@@ -133,7 +133,7 @@ if ($users.Length -gt 0) {
     }
     
     #Export CSV file - Update output location as required
-    $path = 'C:\Users\jmconway\Documents\Import_Learners.csv'
+    $path = 'PATH\TO\CSV\Import_Learners.csv'
     $List | Export-CSV $path -NoTypeInformation -Encoding UTF8
     Remove-UTF8BOM $path
 

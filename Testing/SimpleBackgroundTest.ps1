@@ -1,5 +1,5 @@
 ﻿# Construct the URL for the blob
-$imageUrl = "https://lmsitdeployment.blob.core.windows.net/intunefiles/img0.jpg"
+$imageUrl = "ADD URL HERE.jpg"
 
 # Use Invoke-WebRequest to download the image
 Invoke-WebRequest -Uri $ImageUrl -OutFile "$env:TEMP\background.jpg"

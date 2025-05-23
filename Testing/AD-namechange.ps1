@@ -9,12 +9,12 @@ Import-Module ADSync;
 #Old Name
 $oldfirstname='';
 $oldlastname='';
-$oldusername='bugs.bunny';        
+$oldusername='';        
  
 #New Name
-$newfirstname='Bugs';
-$newlastname='Bunny';
-$newusername='Bugs.Bunny';           
+$newfirstname='';
+$newlastname='';
+$newusername='';           
  
 $logfile = 'c:\temp\UserAccountRename.txt';
  
@@ -23,8 +23,8 @@ $logfile = 'c:\temp\UserAccountRename.txt';
 $newdisplayname = "$newfirstname $newlastname";
  
 #UPN Format:
-$oldupn="$oldusername@litera.com";
-$newupn="$newusername@litera.com";
+$oldupn="$oldusername@DOMAIN.com";
+$newupn="$newusername@DOMAIN.com";
  
  
 #Leave Variables alone below unless fixing a problem or if you have a different setup:
@@ -47,7 +47,7 @@ Add-Content $logfile $errormessage;
 #check if newusername already exists (could be a problem)
 try 
 {
-    $user = Get-ADUser -Filter "sAMAccountName -eq '$newusername'" -SearchBase 'DC=literams,DC=net' -Properties cn,displayname,givenname,initials;
+    $user = Get-ADUser -Filter "sAMAccountName -eq '$newusername'" -SearchBase 'DC=DISTINGUISHED OU' -Properties cn,displayname,givenname,initials;
 }
 catch
 {
@@ -60,7 +60,7 @@ if ($null -eq $user)
  
     try 
     {
-        $user = Get-ADUser -Filter "sAMAccountName -eq '$oldusername'" -SearchBase 'DC=literams,DC=net' -Properties cn,displayname,givenname,initials;
+        $user = Get-ADUser -Filter "sAMAccountName -eq '$oldusername'" -SearchBase 'DC=DISTINGUISHED OU' -Properties cn,displayname,givenname,initials;
     }
     catch
     {

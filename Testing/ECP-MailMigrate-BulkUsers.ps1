@@ -22,8 +22,8 @@ foreach ($User in $ADUsers)
     $company    = $User.company
     $department = $User.department
     $Password = $User.Password
-    $upn        = "$Username@literams.net"
-    $RRA        = "$Username@literams.mail.onmicrosoft.com"
+    $upn        = "$Username@DOMAIN.com"
+    $RRA        = "$Username@DOMAIN.mail.onmicrosoft.com"
 
 
     

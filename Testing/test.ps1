@@ -1,6 +1,6 @@
 # Define the input CSV file and the output CSV file
-$inputCsvFile = 'C:\Users\josh.conway\OneDrive - Litera\Documents\group.csv'
-$outputCsvFile = 'C:\Users\josh.conway\OneDrive - Litera\Documents\group2.csv'
+$inputCsvFile = 'group.csv'
+$outputCsvFile = 'group2.csv'
 
 # Read the content of the CSV file
 $content = Get-Content -Path $inputCsvFile

@@ -55,7 +55,7 @@ Start-Sleep -Seconds 50
 $j = $true
 while ($j){
 
-    if (Get-User -Identity $Mailbox| where {$_.RecipientType -eq "MailUser"}) {
+    if (Get-User -Identity $Mailbox| Where-Object {$_.RecipientType -eq "MailUser"}) {
                          
         Write-host " Migration from local exchange to online exchange is in progress....."
         Start-Sleep -Seconds 30
@@ -75,7 +75,7 @@ while ($j){
 $i = $true
 while ($i){
 
-    if (Get-MoveRequest -Identity $Mailbox| where {$_.status -eq "Completed"}) {
+    if (Get-MoveRequest -Identity $Mailbox| Where-Object {$_.status -eq "Completed"}) {
 
         Write-host "Mailbox is migrated from local exchange to online exchange successfully"
         Set-MsolUser -UserPrincipalName $Mailbox -UsageLocation US

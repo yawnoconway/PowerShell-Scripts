@@ -5,8 +5,8 @@ Write-Host "  "
 
 $user = Read-Host "Enter Username for User (e.g. first.last): "
 
-$upn = $user+"@litera.com"
+$upn = $user+"@DOMAIN.com"
 
-$RRA = $user+"@literams.mail.onmicrosoft.com"
+$RRA = $user+"@DOMAIN.mail.onmicrosoft.com"
 
 Enable-RemoteMailbox $upn -RemoteRoutingAddress $RRA

@@ -2,7 +2,7 @@
 
 # Get all users
 #Get-MgUser -filter "accountEnabled eq false" -All | Select-Object Id, DisplayName, UserPrincipalName |
-#Export-Csv -Path "C:\Users\josh.conway\Downloads\DisabledUsersLast6Months.csv" -NoTypeInformation
+#Export-Csv -Path "PATH\TO\CSV\DisabledUsersLast6Months.csv" -NoTypeInformation
 
 
 
@@ -35,4 +35,4 @@ foreach ($User in $DisabledUsers) {
 }
 
 # Export the filtered users to CSV
-$DisabledUsersLast6Months | Export-Csv -Path "C:\Users\josh.conway\Downloads\DisabledUsersLast6Months.csv" -NoTypeInformation
+$DisabledUsersLast6Months | Export-Csv -Path "PATH\TO\CSV\DisabledUsersLast6Months.csv" -NoTypeInformation

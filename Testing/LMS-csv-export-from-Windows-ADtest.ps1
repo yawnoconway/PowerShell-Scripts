@@ -16,8 +16,8 @@ Function Remove-UTF8BOM
 #Get users from Windows AD
 
 # Set the Active Directory OU as required below ( if the below left commented all users from AD will be returned )
-$BaseOU = "OU=Current,OU=Users,OU=LiteraMS,DC=literams,DC=net"
-$ExcludeOUs = "OU=PeppermintTechnology,OU=Current,OU=Users,OU=LiteraMS,DC=literams,DC=net","OU=OfficeAndDragons,OU=Current,OU=Users,OU=LiteraMS,DC=literams,DC=net","OU=HG-JMAN-Teneo,OU=Contractors,OU=Current,OU=Users,OU=LiteraMS,DC=literams,DC=net", "OU=Broadcast1Source,OU=Contractors,OU=Current,OU=Users,OU=LiteraMS,DC=literams,DC=net", "OU=New,OU=Current,OU=Users,OU=LiteraMS,DC=literams,DC=net", "OU=Missing ADP Data,OU=New,OU=Current,OU=Users,OU=LiteraMS,DC=literams,DC=net", "OU=User Templates,OU=New,OU=Current,OU=Users,OU=LiteraMS,DC=literams,DC=net"
+$BaseOU = "ADD DISTINGUISTED OU HERE"
+$ExcludeOUs = "ADD DISTINGUISTED OU HERE"
 
 $users = Get-ADUser -Filter * -Properties * -SearchBase $BaseOU | Where-Object {
     # Check if the user object is not null

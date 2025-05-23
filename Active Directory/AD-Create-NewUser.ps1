@@ -1,5 +1,5 @@
 ﻿#  Set AD Path to OU for new users
-$path = "OU=New,OU=Current,OU=Users,OU=LiteraMS,DC=literams,DC=net"
+$path = "DISTINGUISHED OU"
 
 $userGivenName = Read-Host "New User Given Name? "
 $userSurname = Read-Host "New User Surname? "
@@ -10,7 +10,7 @@ $userDescription = Read-Host "New User Description? "
 $name = $userGivenName + " " + $userSurname
 $displayName = $userGivenName + " " + $userSurname 
 $securePwd = ConvertTo-SecureString $userPassword -AsPlainText -Force
-$UPN = $userName + "@litera.com"
+$UPN = $userName + "@DOMAIN.com"
 
 $parms = @{
     'Name'              = $name;

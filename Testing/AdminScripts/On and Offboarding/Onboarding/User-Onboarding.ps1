@@ -28,10 +28,10 @@ foreach ($User in $ADUsers)
     $Password = $User.Password
 
     if ($employeetype -eq "FTE") {
-    $OU = "OU=India,OU=Staff,OU=Current,OU=Users,OU=LiteraMS,DC=literams,DC=net"
+    $OU = "DISTINGUISHED OU"
 }
 else {
-    $OU = "OU=Arche Softronix,OU=Contractors,OU=Current,OU=Users,OU=LiteraMS,DC=literams,DC=net"
+    $OU = "DISTINGUISHED OU"
 }
 
 
@@ -131,7 +131,7 @@ foreach ($User in $ADUsers)
 $j = $true
 while ($j){
 
-    if (Get-User -Identity $Mailbox| where {$_.RecipientType -eq "MailUser"}) {
+    if (Get-User -Identity $Mailbox| Where-Object {$_.RecipientType -eq "MailUser"}) {
                          
         Write-host " Migration of $Mailbox from local exchange to online exchange is in progress....."
         New-MoveRequest -Identity $Mailbox -Remote -RemoteHostName $Endpoint -TargetDeliveryDomain $TargetDomain -RemoteCredential $O365cred -Batchname "$Mailbox Move to O365"
@@ -156,7 +156,7 @@ foreach ($User in $ADUsers)
     $i = $true
 while ($i){
 
-    if (Get-MoveRequest -Identity $Mailbox| where {$_.status -eq "Completed"}) {
+    if (Get-MoveRequest -Identity $Mailbox| Where-Object {$_.status -eq "Completed"}) {
 
         Write-host "$Mailbox is migrated from local exchange to online exchange successfully"
         Set-MsolUser -UserPrincipalName $Mailbox -UsageLocation US

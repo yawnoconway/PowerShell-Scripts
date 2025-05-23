@@ -1141,7 +1141,7 @@ function Show-Banner {
     Write-Host $bannerText -ForegroundColor Cyan
     Write-Host "User Onboarding Script v1.0" -ForegroundColor Green
     Write-Host "Created: April 24, 2025" -ForegroundColor Green
-    Write-Host "Author: Devin AI" -ForegroundColor Green
+    Write-Host "Author: yawnoconway" -ForegroundColor Green
     Write-Host "--------------------------------------------------------------" -ForegroundColor White
 }
 

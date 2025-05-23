@@ -2,7 +2,7 @@
 # Connect-AzureAD First
 
 # Read security group details from CSV file
-$CSVRecords = Import-Csv "C:\Users\josh.conway\OneDrive - Litera\Documents\BulkAzureSGCreation.csv"
+$CSVRecords = Import-Csv "PATH\TO\CSV\BulkAzureSGCreation.csv"
 $TotalItems = $CSVRecords.Count
 $i = 0
   

@@ -9,4 +9,4 @@ $subscriptions = Get-AzSubscription
 $subscriptions | Format-Table -Property Id, Name, TenantId, State
 
 # Export to a CSV file
-$subscriptions | Export-Csv -Path "C:\Users\josh.conway\Downloads\subscriptions.csv" -NoTypeInformation
+$subscriptions | Export-Csv -Path "PATH\TO\CSV\subscriptions.csv" -NoTypeInformation

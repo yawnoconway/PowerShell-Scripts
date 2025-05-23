@@ -3,9 +3,9 @@ Connect-AzAccount
 
 # Create a new Excel package
 New-Object -TypeName OfficeOpenXml.ExcelPackage
-$excelFilePath = "C:\Users\josh.conway\Downloads\AzureSubscriptionsData.xlsx"
+$excelFilePath = "PATH\TO\XLSX\AzureSubscriptionsData.xlsx"
 
-Import-Csv -Path "C:\Users\josh.conway\Downloads\subscriptions.csv" | ForEach-Object {
+Import-Csv -Path "PATH\TO\CSV\subscriptions.csv" | ForEach-Object {
     $SubID = ($_.SubscriptionId)
 
     # Set the context to the subscription

@@ -6,7 +6,7 @@ $sam = Read-Host "Enter SamAccountName for User: "
 
 $User = Get-ADUser -Identity $sam
 
-$newUPN = $user.SamAccountName+"@litera.com"
+$newUPN = $user.SamAccountName+"@DOMAIN.com"
 
 Set-ADUser -Identity $sam -UserPrincipalName $newUPN
 
