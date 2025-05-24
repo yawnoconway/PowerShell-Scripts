@@ -5,7 +5,7 @@ Import-Module ActiveDirectory
 Remove-Item -Path "C:\TEMP\non_existent_users.csv" -Force -ErrorAction SilentlyContinue
 
 #Imports CSV and modifies the manager, title, company, and department attribute based on the samaccount name
-Import-Csv -Path C:\temp\ADP-Repo\workday_hcm_exportADSYNC.csv | ForEach-Object {
+Import-Csv -Path "PATH\TO\CSV.csv" | ForEach-Object {
     $EmpStatus  = $($_.EmpStatus)
     $User       = ($($_.mail) -replace "@.*", "$null")
     $Manager    = ($($_.manager) -replace "@.*", "$null")
