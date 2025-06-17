@@ -1,4 +1,18 @@
-﻿# Check if the user is connected to Exchange Online
+﻿<#
+.SYNOPSIS
+    Add Synopsis Here
+.DESCRIPTION
+    Add Description Here
+.NOTES
+    Version: 1.0
+    Updated: June 16, 2025
+    Author: Josh Conway
+    Previous: N/A
+    Changelog:
+        1.0 - Initial version
+#>
+
+# Check if the user is connected to Exchange Online
 $getSessions = Get-ConnectionInformation | Select-Object Name
 $isConnected = (@($getSessions.Name) -like 'ExchangeOnline*').Count -gt 0
 If ($isConnected -ne 'True') {

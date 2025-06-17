@@ -1,3 +1,17 @@
+<#
+.SYNOPSIS
+    Add Synopsis Here
+.DESCRIPTION
+    Add Description Here
+.NOTES
+    Version: 1.0
+    Updated: June 16, 2025
+    Author: Josh Conway
+    Previous: N/A
+    Changelog:
+        1.0 - Initial version
+#>
+
 # Replace these variables with your specific values
 $oldGroupId = Read-Host -Prompt "Enter the Object ID that you wish to clone"
 $newGroupName = Read-Host -Prompt "Enter the name for the new cloned group (e.g. Cloned-SecurityGroup)"

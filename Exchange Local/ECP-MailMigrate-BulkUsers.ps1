@@ -1,4 +1,18 @@
-﻿#Store the data from ADUsers.csv in the $ADUsers variable
+﻿<#
+.SYNOPSIS
+    Add Synopsis Here
+.DESCRIPTION
+    Add Description Here
+.NOTES
+    Version: 1.0
+    Updated: June 16, 2025
+    Author: Josh Conway
+    Previous: N/A
+    Changelog:
+        1.0 - Initial version
+#>
+
+#Store the data from ADUsers.csv in the $ADUsers variable
 $ADUsers = Import-csv PATH\TO\CSV\bulk_users1.csv
 
 #Loop through each row containing user details in the CSV file 

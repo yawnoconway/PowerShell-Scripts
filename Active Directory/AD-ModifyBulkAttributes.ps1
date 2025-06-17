@@ -1,4 +1,18 @@
-﻿#Imports ActiveDirectory Module
+﻿<#
+.SYNOPSIS
+    Add Synopsis Here
+.DESCRIPTION
+    Add Description Here
+.NOTES
+    Version: 1.0
+    Updated: June 16, 2025
+    Author: Josh Conway
+    Previous: N/A
+    Changelog:
+        1.0 - Initial version
+#>
+
+#Imports ActiveDirectory Module
 Import-Module ActiveDirectory
 
 #Remove old "Non Existent Users" csv

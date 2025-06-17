@@ -1,4 +1,18 @@
-﻿# Replace with the actual display name of the group
+﻿<#
+.SYNOPSIS
+    Add Synopsis Here
+.DESCRIPTION
+    Add Description Here
+.NOTES
+    Version: 1.0
+    Updated: June 16, 2025
+    Author: Josh Conway
+    Previous: N/A
+    Changelog:
+        1.0 - Initial version
+#>
+
+# Replace with the actual display name of the group
 $groupName = Read-Host -Prompt "Enter the name of the Security Group you want the members of."
 
 # Connect to Microsoft Graph

@@ -1,6 +1,17 @@
-# Changelog
-# 1.5 - Will now create a new folder based on the tenant_id variable in the template
-# 1.0 - Initial version
+<#
+.SYNOPSIS
+    Add Synopsis Here
+.DESCRIPTION
+    Add Description Here
+.NOTES
+    Version: 1.5
+    Updated: June 16, 2025
+    Author: Josh Conway
+    Previous: N/A
+    Changelog:
+        1.5 - Will now create a new folder based on the tenant_id variable in the template
+        1.0 - Initial version
+#>
 
 # Load the template file
 $template = Get-Content "$PSScriptRoot\template.txt" -Raw

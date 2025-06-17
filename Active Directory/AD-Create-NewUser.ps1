@@ -1,4 +1,18 @@
-﻿#  Set AD Path to OU for new users
+﻿<#
+.SYNOPSIS
+    Add Synopsis Here
+.DESCRIPTION
+    Add Description Here
+.NOTES
+    Version: 1.0
+    Updated: June 16, 2025
+    Author: Josh Conway
+    Previous: N/A
+    Changelog:
+        1.0 - Initial version
+#>
+
+#  Set AD Path to OU for new users
 $path = "DISTINGUISHED OU"
 
 $userGivenName = Read-Host "New User Given Name? "

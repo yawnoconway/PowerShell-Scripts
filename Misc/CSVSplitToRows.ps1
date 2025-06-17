@@ -1,3 +1,17 @@
+<#
+.SYNOPSIS
+    Add Synopsis Here
+.DESCRIPTION
+    Add Description Here
+.NOTES
+    Version: 1.0
+    Updated: June 16, 2025
+    Author: Josh Conway
+    Previous: N/A
+    Changelog:
+        1.0 - Initial version
+#>
+
 # Define the input CSV file and the output CSV file
 $inputCsvFile = 'group.csv'
 $outputCsvFile = 'group2.csv'

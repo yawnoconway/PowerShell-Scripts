@@ -1,3 +1,17 @@
+<#
+.SYNOPSIS
+    Add Synopsis Here
+.DESCRIPTION
+    Add Description Here
+.NOTES
+    Version: 1.0
+    Updated: June 16, 2025
+    Author: Josh Conway
+    Previous: N/A
+    Changelog:
+        1.0 - Initial version
+#>
+
 # Define the distinguished name (DN) of the source OU and the target OU
 $sourceOU = Read-Host -Prompt "Enter the Source OU of users to move. (e.g. 'OU=Current,OU=Users,OU=Business,DC=Example,DC=net')"
 $targetOU = Read-Host -Prompt "Enter the Target OU to move the users to. (e.g. 'OU=Current,OU=Users,OU=Business,DC=Example,DC=net')"
