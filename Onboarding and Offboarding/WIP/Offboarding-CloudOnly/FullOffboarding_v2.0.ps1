@@ -5,9 +5,9 @@
     Complete user offboarding script for M365.
 .DESCRIPTION
     This script automates the offboarding process for users by:
-    - Disabling AD account
+    - Disabling M365 account
     - Changing password to a random value
-    - Modifying AD attributes
+    - Modifying user attributes
     - Clearing manager field
     - Capturing and removing group memberships
     - Hiding from GAL
@@ -18,14 +18,14 @@
     - Removing from 365 groups
 .NOTES
     Version: 2.0
-    Updated: April 18, 2025
+    Updated: June 23, 2025
     Author: Josh Conway
     Previous: v1.5
     Changelog:
         2.0 - Code rewrite - function based
               Added        - error catching, logging, success/failure tracking, script config
               Removed      - hardcoded file paths
-              Changed      - new password generator
+              Changed      - Split for cloud only and cloud+local, new password generator
 
         1.5 - Now clears manager field, grabs group memberships, wipes mobile outlook containers, removed mailbox foward,
               added mailbox full access, and connects to Graph to removes 365 groups and licenses
@@ -201,46 +201,54 @@ function Get-RandomPassword {
     return -join $password
 }
 
-function Disable-UserAccount {
+function Disable-M365UserAccount {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory = $true)]
-        [string]$UserSAM
+        [string]$UserMail
     )
-    
+
     try {
-        if ((Get-ADUser -Identity $UserSAM -ErrorAction Stop).Enabled -eq $false) {
-            Write-Log "$UserSAM is already disabled"
+        $user = Get-MgUser -UserId $UserMail -ErrorAction Stop
+
+        if ($user.AccountEnabled -eq $false) {
+            Write-Log "$UserMail is already disabled"
         }
         else {
-            Disable-ADAccount -Identity $UserSAM -ErrorAction Stop
-            Write-Log "Successfully disabled account for $UserSAM"
+            Update-MgUser -UserId $UserMail -AccountEnabled:$false -ErrorAction Stop
+            Write-Log "Successfully disabled account for $UserMail"
         }
         return $true
     }
     catch {
-        Write-Log "Failed to disable account for ${UserSAM}: $($_.Exception.Message)" -Level Error
+        Write-Log "Failed to disable account for ${UserMail}: $($_.Exception.Message)" -Level Error
         return $false
     }
 }
 
-function Set-UserPassword {
+function Set-M365UserPassword {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory = $true)]
-        [string]$UserSAM,
-        
+        [string]$UserMail,
+
         [Parameter(Mandatory = $false)]
         [SecureString]$Password = (Get-RandomPassword)
     )
-    
+
     try {
-        Set-ADAccountPassword -Identity $UserSAM -NewPassword (ConvertTo-SecureString -AsPlainText $Password -Force) -ErrorAction Stop
-        Write-Log "Successfully changed password for $UserSAM"
+        $PlainPassword = [System.Net.NetworkCredential]::new("", $Password).Password
+
+        Update-MgUser -UserId $UserMail -PasswordProfile @{
+            Password                      = $PlainPassword
+            ForceChangePasswordNextSignIn = $false
+        } -ErrorAction Stop
+
+        Write-Host "Successfully changed password for $UserMail"
         return $true
     }
     catch {
-        Write-Log "Failed to change password for ${UserSAM}: $($_.Exception.Message)" -Level Error
+        Write-Host "Failed to change password for ${UserMail}: $($_.Exception.Message)" -ForegroundColor Red
         return $false
     }
 }
@@ -249,26 +257,21 @@ function Set-UserAttributes {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory = $true)]
-        [string]$UserSAM
+        [string]$UserMail
     )
     
     try {
-        # Set employment status to Inactive
-        Set-ADUser -Identity $UserSAM -Replace @{empstatus = 'Inactive' } -ErrorAction Stop
-        Set-ADUser -Identity $UserSAM -Replace @{extensionAttribute14 = 'Inactive' } -ErrorAction Stop
+        # Clear attributes
+        Update-MgUser -UserId $UserMail -Department $null -JobTitle $null -ErrorAction Stop
         
         # Clear manager field
-        Set-ADUser -Identity $UserSAM -Manager $null -ErrorAction Stop
+        Remove-MgUserManagerByRef -UserId $UserMail -ErrorAction Stop
         
-        # Hide from GAL
-        Get-ADuser -Identity $UserSAM -property msExchHideFromAddressLists | 
-        Set-ADObject -Replace @{msExchHideFromAddressLists = $true } -ErrorAction Stop
-        
-        Write-Log "Successfully updated attributes for $UserSAM"
+        Write-Log "Successfully updated attributes for $UserMail"
         return $true
     }
     catch {
-        Write-Log "Failed to update attributes for ${UserSAM}: $($_.Exception.Message)" -Level Error
+        Write-Log "Failed to update attributes for ${UserMail}: $($_.Exception.Message)" -Level Error
         return $false
     }
 }
@@ -280,9 +283,6 @@ function Export-GroupMemberships {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory = $true)]
-        [string]$UserSAM,
-        
-        [Parameter(Mandatory = $true)]
         [string]$UserMail
     )
     
@@ -292,7 +292,7 @@ function Export-GroupMemberships {
             New-Item -Path $Script:Config.GroupMembershipExportPath -ItemType Directory -Force | Out-Null
         }
         
-        $exportPath = Join-Path -Path $Script:Config.GroupMembershipExportPath -ChildPath "$UserSAM.csv"
+        $exportPath = Join-Path -Path $Script:Config.GroupMembershipExportPath -ChildPath "$Username.csv"
         
         # Export Microsoft 365 group memberships
         Get-MgUserMemberOf -UserId $UserMail | 
@@ -300,11 +300,11 @@ function Export-GroupMemberships {
         Select-Object DisplayName | 
         Export-Csv -Path $exportPath -NoTypeInformation -ErrorAction Stop
         
-        Write-Log "Successfully exported group memberships for $UserSAM to $exportPath"
+        Write-Log "Successfully exported group memberships for $UserMail to $exportPath"
         return $true
     }
     catch {
-        Write-Log "Failed to export group memberships for ${UserSAM}: $($_.Exception.Message)" -Level Error
+        Write-Log "Failed to export group memberships for ${UserMail}: $($_.Exception.Message)" -Level Error
         return $false
     }
 }
@@ -353,6 +353,28 @@ function Remove-UserFrom365Groups {
 #-----------------------------
 # Mailbox Functions
 #-----------------------------
+function Set-HideFromAddressLists {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$UserMail
+    )
+
+    try {
+        # Hide from address lists
+        Set-Mailbox -Identity $UserMail `
+            -HiddenFromAddressListsEnabled $true `
+            -ErrorAction Stop
+
+        Write-Host "Successfully hid $UserMail from GAL"
+        return $true
+    }
+    catch {
+        Write-Host "Failed to hide $UserMail from GAL: $($_.Exception.Message)" -ForegroundColor Red
+        return $false
+    }
+}
+
 function Set-MailboxToShared {
     [CmdletBinding()]
     param(
@@ -489,7 +511,6 @@ function Start-UserOffboarding {
     )
     
     # Initialize variables
-    $UserSAM = ($Username -replace '(?<=(.{20})).+')
     $UserMail = "$Username@$($Script:Config.Domain)"
     $Password = Get-RandomPassword
     
@@ -497,16 +518,17 @@ function Start-UserOffboarding {
     
     # Track success/failure for each step
     $results = @{
-        "Disable Account"        = Disable-UserAccount -UserSAM $UserSAM
-        "Set Password"           = Set-UserPassword -UserSAM $UserSAM -Password $Password
-        "Set Attributes"         = Set-UserAttributes -UserSAM $UserSAM
-        "Export Groups"          = Export-GroupMemberships -UserSAM $UserSAM -UserMail $UserMail
+        "Disable Account"        = Disable-M365UserAccount -UserMail $UserMail
+        "Set Password"           = Set-M365UserPassword -UserMail $UserMail -Password $Password
+        "Set Attributes"         = Set-UserAttributes -UserMail $UserMail
+        "Export Groups"          = Export-GroupMemberships -UserMail $UserMail
+        "Hide from GAL"          = Set-HideFromAddressLists -UserMail $UserMail
         "Set Mailbox to Shared"  = Set-MailboxToShared -UserMail $UserMail -FullAccessUser $FullAccessUser
         "Remove Licenses"        = Remove-UserLicenses -UserMail $UserMail
         "Remove from 365 Groups" = Remove-UserFrom365Groups -UserMail $UserMail
     }
     
-    # Optional: Uncomment to enable mobile device wipe
+    # Optional: Uncomment/add below to above list to enable mobile device wipe
     # $results["Clear Mobile Devices"] = Clear-MobileDevices -UserMail $UserMail
     
     # Count successes and failures
@@ -554,15 +576,15 @@ This script will do the following in this order:
 
            1. Disable M365 account
            2. Change password
-           3. Modify Emp Status and Ext Attr 14 to 'Inactive'
+           3. Clear user attributes (Department, Job Title)
            4. Clear manager field
            5. Capture group memberships and export as csv
            6. Hide from GAL
            7. **Wipe and/or block mobile device outlook containers** (Disabled by default)
            8. Convert to shared mailbox
            9. Set mailbox 'Full Access' permission if specified
-          10. Remove 365 Licenses from User
-          11. Removes User from 365 groups
+          10. Remove 365 licenses from user
+          11. Removes user from 365 groups
 "@
     
     Write-Host $infoText -ForegroundColor Cyan
