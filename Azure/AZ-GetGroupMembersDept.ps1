@@ -1,8 +1,10 @@
 ﻿<#
 .SYNOPSIS
-    Add Synopsis Here
+    Export members of a specified Azure Active Directory Security Group to a CSV file, including user details like Display Name and Department.
 .DESCRIPTION
-    Add Description Here
+    This script connects to Microsoft Graph, retrieves the members of a specified Azure AD Security Group,
+    and exports their details (UserId, DisplayName, Department) to a CSV file.
+    The script prompts for the group name and requires appropriate permissions to read group and user information.
 .NOTES
     Version: 1.0
     Updated: June 16, 2025

@@ -1,8 +1,11 @@
 <#
 .SYNOPSIS
-    Add Synopsis Here
+    Export the membership of a dynamic distribution group to a CSV file in Exchange Online.
 .DESCRIPTION
-    Add Description Here
+    This script connects to Exchange Online, retrieves the members of a specified dynamic distribution group,
+    and exports their details (DisplayName and PrimarySmtpAddress) to a CSV file.
+    The script prompts for the name of the dynamic distribution group and the output file path.
+    It requires appropriate permissions to read dynamic distribution group membership in Exchange Online.
 .NOTES
     Version: 1.0
     Updated: June 16, 2025

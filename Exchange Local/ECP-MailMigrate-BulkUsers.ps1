@@ -1,8 +1,10 @@
 ﻿<#
 .SYNOPSIS
-    Add Synopsis Here
+    Mail-Enable multiple users in local Exchange from a CSV file.
 .DESCRIPTION
-    Add Description Here
+    This script reads user details from a CSV file and enables each user for mail in an on-premises Exchange environment.
+    It constructs the User Principal Name (UPN) and Remote Routing Address (RRA) based on the username provided in the CSV.
+    The script requires appropriate permissions to enable remote mailboxes in Exchange.
 .NOTES
     Version: 1.0
     Updated: June 16, 2025

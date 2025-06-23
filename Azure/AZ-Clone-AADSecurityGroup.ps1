@@ -1,8 +1,10 @@
 <#
 .SYNOPSIS
-    Add Synopsis Here
+    Clone an Azure Active Directory Security Group and its members, including application role assignments.
 .DESCRIPTION
-    Add Description Here
+    This script clones an existing Azure AD security group by creating a new group with the same members and application role assignments.
+    It prompts for the Object ID of the group to clone, the name, description, and mail nickname for the new group.
+    The script requires appropriate permissions to read and write groups and applications in Azure AD.
 .NOTES
     Version: 1.0
     Updated: June 16, 2025

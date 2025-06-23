@@ -1,8 +1,10 @@
 ﻿<#
 .SYNOPSIS
-    Add Synopsis Here
+    Update the User Principal Name (UPN) for a specific user in Active Directory.
 .DESCRIPTION
-    Add Description Here
+    This script updates the User Principal Name (UPN) for a specific user in Active Directory.
+    It prompts for the SamAccountName of the user and constructs a new UPN based on the SamAccountName.
+    The script then updates the user's UPN and displays the updated user information.
 .NOTES
     Version: 1.0
     Updated: June 16, 2025

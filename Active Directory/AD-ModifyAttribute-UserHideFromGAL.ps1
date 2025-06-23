@@ -1,8 +1,10 @@
 <#
 .SYNOPSIS
-    Add Synopsis Here
+    Hide users from the Global Address List (GAL) in Active Directory.
 .DESCRIPTION
-    Add Description Here
+    This script modifies the msExchHideFromAddressLists attribute for all users in a specified Organizational Unit (OU) to hide them from the Global Address List (GAL).
+    It also clears the ShowinAddressBook attribute for each user.
+    The script prompts for the OU where the users are located.
 .NOTES
     Version: 1.0
     Updated: June 16, 2025

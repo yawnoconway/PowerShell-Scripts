@@ -1,8 +1,10 @@
 ﻿<#
 .SYNOPSIS
-    Add Synopsis Here
+    Check and export Exchange Online mailboxes with forwarding settings.
 .DESCRIPTION
-    Add Description Here
+    This script connects to Exchange Online and allows the user to check for mailboxes with forwarding settings.
+    It can run for all users, a single user, or a list of users from a CSV file. The results are exported to a CSV file.
+    The script requires appropriate permissions to read mailbox properties in Exchange Online.
 .NOTES
     Version: 1.0
     Updated: June 16, 2025

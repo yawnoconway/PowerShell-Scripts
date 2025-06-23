@@ -1,8 +1,10 @@
 <#
 .SYNOPSIS
-    Add Synopsis Here
+    Split a CSV file into individual rows based on comma-separated values.
 .DESCRIPTION
-    Add Description Here
+    This script reads a CSV file where each line contains comma-separated values,
+    splits these values into individual rows, and writes them to a new CSV file.
+    The output CSV will contain one value per line.
 .NOTES
     Version: 1.0
     Updated: June 16, 2025

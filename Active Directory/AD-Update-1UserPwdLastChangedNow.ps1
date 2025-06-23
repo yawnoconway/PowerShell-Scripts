@@ -1,8 +1,10 @@
 ﻿<#
 .SYNOPSIS
-    Add Synopsis Here
+    Update the PwdLastSet attribute for a specific user in Active Directory.
 .DESCRIPTION
-    Add Description Here
+    This script updates the PwdLastSet attribute for a specific user in Active Directory.
+    It sets the password to expired, allows the password to be changed, and resets the last password change date to today.
+    The script prompts for the username of the user whose password needs to be updated.
 .NOTES
     Version: 1.0
     Updated: June 16, 2025

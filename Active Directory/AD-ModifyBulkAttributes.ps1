@@ -1,8 +1,11 @@
 ﻿<#
 .SYNOPSIS
-    Add Synopsis Here
+    Modify multiple Active Directory user attributes based on a CSV file.
 .DESCRIPTION
-    Add Description Here
+    This script allows you to modify multiple attributes of Active Directory users based on data from a CSV file.
+    The CSV file should contain columns for the user's email, manager, title, company, department, and other attributes.
+    The script will check if the user exists in Active Directory and update their attributes accordingly.
+    If a user does not exist, their email will be logged in a separate CSV file for review.
 .NOTES
     Version: 1.0
     Updated: June 16, 2025

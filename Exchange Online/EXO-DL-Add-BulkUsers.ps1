@@ -1,8 +1,10 @@
 <#
 .SYNOPSIS
-    Add Synopsis Here
+    Add multiple users to a Distribution List in Exchange Online from a CSV file.
 .DESCRIPTION
-    Add Description Here
+    This script connects to Exchange Online, prompts for a Distribution List name or SMTP address,
+    and adds members from a specified CSV file. The CSV file should contain a column named 'mail' with user email addresses.
+    The script requires appropriate permissions to modify Distribution Groups in Exchange Online.
 .NOTES
     Version: 1.0
     Updated: June 16, 2025

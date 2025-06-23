@@ -1,8 +1,11 @@
 <#
 .SYNOPSIS
-    Add Synopsis Here
+    Create Terraform files from a template and a CSV file in a specified directory.
 .DESCRIPTION
-    Add Description Here
+    This script reads a template file and a CSV file, replaces placeholders in the template with values from the CSV,
+    and creates Terraform files in a new directory named after the tenant_id extracted from the template.
+    If the directory already exists, it will be deleted before creating a new one.
+    The script requires PowerShell and appropriate permissions to create directories and files.
 .NOTES
     Version: 1.5
     Updated: June 16, 2025

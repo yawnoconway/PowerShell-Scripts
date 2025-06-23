@@ -1,8 +1,10 @@
 <#
 .SYNOPSIS
-    Add Synopsis Here
+    Move users to a new Organizational Unit (OU) based on a specific attribute.
 .DESCRIPTION
-    Add Description Here
+    This script moves users from a specified source OU to a target OU if a specific attribute (e.g., extensionAttribute10) is not blank.
+    The script prompts for the source and target OUs and checks each user in the source OU for the specified attribute.
+    If the attribute is not blank, the user is moved to the target OU.
 .NOTES
     Version: 1.0
     Updated: June 16, 2025

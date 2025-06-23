@@ -1,8 +1,10 @@
 <#
 .SYNOPSIS
-    Add Synopsis Here
+    Update the DisplayName of Dynamic Distribution Lists (DDL) in Exchange Online.
 .DESCRIPTION
-    Add Description Here
+    This script updates the DisplayName of Dynamic Distribution Lists (DDL) in Exchange Online to match their Name property.
+    It can update all DDLs, a single DDL, or multiple DDLs from a CSV file containing email addresses.
+    The script requires appropriate permissions to modify Dynamic Distribution Groups in Exchange Online.
 .NOTES
     Version: 1.0
     Updated: June 16, 2025

@@ -1,8 +1,10 @@
 <#
 .SYNOPSIS
-    Add Synopsis Here
+    Check for Direct vs Group-based License Assignments in Microsoft 365.
 .DESCRIPTION
-    Add Description Here
+    This script retrieves license assignments for users in Microsoft 365 and identifies those who have both Direct and Group-based assignments for a specified SKU.
+    It prompts the user for the SKU Part Number, retrieves the relevant users, and allows the option to remove direct licenses if both types of assignments are found.
+    Finally, it exports the results to a CSV file.
 .NOTES
     Version: 1.0
     Updated: June 16, 2025

@@ -1,8 +1,9 @@
 ﻿<#
 .SYNOPSIS
-    Add Synopsis Here
+    Create a new Active Directory user account.
 .DESCRIPTION
-    Add Description Here
+    This script allows you to create a new Active Directory user account by prompting for user details such as given name, surname, username, password, and description.
+    The script will then create the user in the specified OU with the provided details.
 .NOTES
     Version: 1.0
     Updated: June 16, 2025

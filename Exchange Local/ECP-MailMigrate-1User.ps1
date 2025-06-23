@@ -1,8 +1,10 @@
 ﻿<#
 .SYNOPSIS
-    Add Synopsis Here
+    Mail-Enable a specific user in local Exchange.
 .DESCRIPTION
-    Add Description Here
+    This script enables a single user for mail in an on-premises Exchange environment.
+    It prompts for the username and constructs the UPN and Remote Routing Address based on the provided username.
+    The script requires appropriate permissions to enable remote mailboxes in Exchange.
 .NOTES
     Version: 1.0
     Updated: June 16, 2025

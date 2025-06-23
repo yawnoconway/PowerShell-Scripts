@@ -1,8 +1,10 @@
 <#
 .SYNOPSIS
-    Add Synopsis Here
+    Bulk add users to a AD security Group from a CSV file.
 .DESCRIPTION
-    Add Description Here
+    This script allows you to bulk add users to an Active Directory security group using a CSV file.
+    The CSV file should contain a column with the email addresses of the users you want to add.
+    The script will extract the username from the email address and add it to the specified security group.
 .NOTES
     Version: 1.0
     Updated: June 16, 2025
@@ -20,7 +22,7 @@ $groupName = Read-Host -Prompt "Enter the name of the Security Group you wish to
 
 $CsvPath = Read-Host -Prompt "Enter the path to your csv file. (e.g., C:\Path\To\Your\Csv.csv)"
 
-#Imports CSV and modifies the manager, title, company, and department attribute based on the samaccount name
+#Import CSV and adds each user to the specified group
 Import-Csv -Path $CsvPath | ForEach-Object {
     $User = ($($_.mail) -replace "@.*", "$null")
     $UserSAM = (($User -replace '(?<=(.{20})).+'))

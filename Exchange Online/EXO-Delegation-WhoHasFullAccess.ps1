@@ -1,8 +1,11 @@
 ﻿<#
 .SYNOPSIS
-    Add Synopsis Here
+    Check delegation permissions for mailboxes in Exchange Online.
 .DESCRIPTION
-    Add Description Here
+    This script checks delegation permissions (Full Access, Send As, Send on Behalf Of) for mailboxes in Exchange Online.
+    It can run for all users, a single user, or multiple users from a CSV file containing email addresses.
+    The results are exported to a CSV file.
+    The script requires appropriate permissions to read mailbox permissions in Exchange Online.
 .NOTES
     Version: 1.0
     Updated: June 16, 2025
